@@ -1,0 +1,29 @@
+# action.yml
+name: "GitHub Action Template"
+author: "matiasalbarello"
+description: "Template for easy start creating a GitHub Action using Ruby"
+inputs:
+  # Configure input params as needed:
+  ref:
+    description: "A git ref: branch/tag/commit sha"
+    required: true
+  github-token:
+    description: "A GitHub token for the repo"
+    required: true
+  owner:
+    description: "Owner of the given Repository"
+    required: false
+  repository:
+    description: "Repository name"
+    required: false
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.ref }}
+    - ${{ inputs.github-token }}
+    - ${{ inputs.owner }}
+    - ${{ inputs.repository }}
+branding:
+  icon: "check-circle"
+  color: "green"
