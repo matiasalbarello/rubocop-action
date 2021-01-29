@@ -13,7 +13,7 @@ class RubocopService
     Dir.chdir(workspace) do
       parse_errors(`rubocop --format json`)
     end
-
+    p annotations # debug
     parsed_output
   rescue StandardError => e
     puts e.message
@@ -44,7 +44,7 @@ class RubocopService
       path = file['path']
       offenses = file['offenses'].map{ |offense_hash| RubocopOffense.new(offense_hash) }
       count = offenses.count
-      annotations = offenses.map do |offense|
+      @annotations = offenses.map do |offense|
         annotation_level = annotation_level(offense.severity)
         conclusion = annotation_level == 'failure' ? 'failure' : 'success'
 

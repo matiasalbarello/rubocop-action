@@ -4,13 +4,7 @@
 require_relative './app/services/main_app_service'
 require 'octokit'
 
-pull_request_nr = `PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')`
 pr_nr = ENV['GITHUB_REF'].split('/')[2]
-puts ENV['GITHUB_REF']
-puts "Splitted:"
-puts ENV['GITHUB_REF'].split('/')
-
-p pr_nr # debug
 return unless pr_nr
 
 MainAppService.configure do |config|

@@ -14,7 +14,7 @@ class MainAppService
     results = rubocop.call
 
     commenter = PullRequestCommenter.new(client, repo, pr_id, ref)
-    rubocop.annotations.each do |annotation|
+    rubocop.annotations&.each do |annotation|
       commenter.comment(annotation)
     end
 
