@@ -6,6 +6,8 @@ require 'octokit'
 event = JSON.parse(File.read(ENV['GITHUB_EVENT_PATH']))
 pull_request = event['pull_request']
 
+return unless pull_request
+
 MainAppService.configure do |config|
   config.client = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
   config.ref = ENV['GITHUB_SHA']
