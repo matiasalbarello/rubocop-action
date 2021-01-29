@@ -2,6 +2,7 @@
 
 require 'active_support/configurable'
 require_relative './rubocop_service'
+require_relative '../models/pull_request_commenter'
 
 class MainAppService
   include ActiveSupport::Configurable
