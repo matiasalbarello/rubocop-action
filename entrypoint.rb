@@ -4,13 +4,15 @@
 require_relative './app/services/main_app_service'
 require 'octokit'
 
-ref, token, owner, repo = ARGV
+pr_nr = ENV['GITHUB_REF'].split('/')[2]
+return unless pr_nr
 
 MainAppService.configure do |config|
-  config.client = Octokit::Client.new(access_token: token)
-  config.ref = ref
-  config.repo = repo
-  config.owner = owner
+  config.client = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
+  config.ref = ENV['GITHUB_SHA']
+  config.repo = ENV['GITHUB_REPOSITORY']
+  config.workspace = ENV['GITHUB_WORKSPACE'] #  a copy of your repository if your workflow uses the actions/checkout action
+  config.pr_id = pr_nr.to_i
 end
 
 MainAppService.new.call
