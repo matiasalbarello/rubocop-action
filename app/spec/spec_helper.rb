@@ -2,6 +2,9 @@
 
 require 'byebug'
 
+models = Dir['./models/**/*.rb']
+models.sort.each { |f| require f }
+
 services = Dir['./services/**/*.rb']
 services.sort.each { |f| require f }
 
