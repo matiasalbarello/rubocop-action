@@ -6,6 +6,7 @@ require 'octokit'
 event = JSON.parse(File.read(ENV['GITHUB_EVENT_PATH']))
 pull_request = event['pull_request']
 
+p event # debug
 return unless pull_request
 
 MainAppService.configure do |config|
